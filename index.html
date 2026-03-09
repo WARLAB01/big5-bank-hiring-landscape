@@ -590,6 +590,239 @@
       text-align: center;
     }
 
+    /* ============ ANALYSIS SECTION ============ */
+    .analysis {
+      padding: 80px 40px;
+      background: white;
+    }
+
+    .analysis-subsection {
+      margin-bottom: 60px;
+    }
+
+    .analysis-subsection h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .analysis-narrative {
+      color: var(--text-primary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+
+    .analysis-narrative p {
+      margin-bottom: 12px;
+    }
+
+    .insight-card {
+      background: var(--pale-blue);
+      border-left: 4px solid var(--orange);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .insight-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .insight-card p {
+      color: var(--gray-dark);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .cross-ref {
+      background: #F0E8FF;
+      border-left: 4px solid #8B5CF6;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 24px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .cross-ref strong {
+      color: #7C3AED;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .toca-lob-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .toca-lob-item {
+      padding: 16px;
+      background: var(--off-white);
+      border-radius: 6px;
+      border: 1px solid var(--gray-light);
+    }
+
+    .toca-lob-item.toca {
+      border-top: 3px solid var(--steel);
+    }
+
+    .toca-lob-item.lob {
+      border-top: 3px solid var(--orange);
+    }
+
+    .toca-lob-item-label {
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-dark);
+      margin-bottom: 8px;
+    }
+
+    .toca-lob-item-list {
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .finding {
+      background: white;
+      border: 1px solid var(--gray-light);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .finding-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    .finding h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .finding p {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+
+    .metric-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .metric-bar-label {
+      min-width: 120px;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .metric-bar-container {
+      flex: 1;
+      height: 24px;
+      background: var(--gray-light);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 16px;
+      position: relative;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--steel) 0%, var(--sky-blue) 100%);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .metric-bar-value {
+      min-width: 50px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    .signal-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .signal-card {
+      background: white;
+      border: 2px solid var(--gray-light);
+      border-radius: 8px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--steel));
+    }
+
+    .signal-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      margin-top: 8px;
+    }
+
+    .signal-card p {
+      font-size: 13px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+
+    .analysis-chart-container {
+      background: white;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .analysis-chart-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     /* ============ SCROLLSPY ============ */
     .scrollspy-active {
       color: var(--orange) !important;
@@ -626,6 +859,7 @@
       <ul class="nav-links">
         <li><a href="#overview" class="nav-link" data-section="overview">Overview</a></li>
         <li><a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a></li>
+        <li><a href="#analysis" class="nav-link" data-section="analysis">Analysis</a></li>
         <li><a href="#explorer" class="nav-link" data-section="explorer">Explorer</a></li>
         <li><a href="#methodology" class="nav-link" data-section="methodology">Methodology</a></li>
         <li><a href="#sources" class="nav-link" data-section="sources">Sources</a></li>
@@ -718,6 +952,188 @@
           <canvas id="locationChart"></canvas>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ANALYSIS -->
+  <section class="analysis" id="analysis">
+    <h2 class="section-title">Analysis</h2>
+    <p class="section-subtitle">Strategic insights from the Big 5 hiring landscape</p>
+
+    <!-- SUBSECTION A: TOCA vs LOB -->
+    <div class="analysis-subsection">
+      <h3>The TOCA Signal: What Hiring Reveals About Support Overhead</h3>
+
+      <p class="analysis-narrative">
+        Across the Big 5, an average of <strong>38.2% of open positions</strong> are in non-revenue-generating functions (Technology, Operations, Corporate Areas). Scotiabank leads with the highest TOCA hiring proportion at 42.3%, while TD has the lowest at 33.8%. This divergence suggests fundamentally different organizational strategies: Scotiabank appears to be investing heavily in infrastructure for transformation, while TD may be consolidating or optimizing its support functions.
+      </p>
+
+      <div class="analysis-chart-container">
+        <div class="analysis-chart-title">TOCA vs LOB Hiring Distribution</div>
+        <div style="height: 300px;">
+          <canvas id="tocaLobChart"></canvas>
+        </div>
+      </div>
+
+      <p class="analysis-narrative">
+        Within TOCA, Technology roles dominate, representing 3.5% to 5.6% of total hiring across the banks. This reflects the ongoing digital transformation imperative in banking. Operations and Risk roles collectively account for 8-12% of hiring, highlighting the persistent compliance and operational complexity in the sector.
+      </p>
+
+      <div class="cross-ref">
+        <strong>WARLAB Context: TOCA Headcount Benchmark</strong>
+        Previous WARLAB research estimated BMO's TOCA headcount at approximately 33% of total FTE — the highest among the Big 6. The hiring data here provides a complementary signal: BMO's current TOCA hiring at 36.9% suggests the institution is working to maintain (but not significantly expand) its support function footprint. In contrast, RBC's 38.1% TOCA hiring indicates a more balanced growth strategy.
+      </div>
+
+      <p class="analysis-narrative">
+        A strategic implication: institutions with TOCA hiring above 40% may be in active transformation mode, building new capabilities (especially in data, analytics, and technology) before automating or consolidating existing processes. Those below 37% may be in optimization or harvest mode, focusing capital on revenue-generating functions.
+      </p>
+    </div>
+
+    <!-- SUBSECTION B: Hiring Intensity -->
+    <div class="analysis-subsection">
+      <h3>Hiring Intensity: Growth, Replacement, or Restructuring?</h3>
+
+      <p class="analysis-narrative">
+        Hiring intensity — measured as the ratio of career site roles per 1,000 employees — reveals the urgency and scale of recruitment efforts across institutions. The metric is a proxy for net hiring activity: higher intensity suggests either aggressive expansion, high attrition, or strategic restructuring.
+      </p>
+
+      <div class="analysis-chart-container">
+        <div class="analysis-chart-title">Hiring Intensity by Bank (Roles per 1,000 FTE)</div>
+        <div style="height: 280px;">
+          <canvas id="intensityDetailChart"></canvas>
+        </div>
+      </div>
+
+      <p class="analysis-narrative">
+        <strong>Scotiabank (21.0 roles per 1,000)</strong> leads by a significant margin, suggesting either aggressive growth investments or substantial organizational restructuring. Historical context: Scotiabank underwent significant leadership and strategic changes in this period, making the elevated hiring intensity consistent with transformation initiatives. <br><br>
+        <strong>RBC (15.3) and BMO (14.9)</strong> sit in the moderate-high range, indicating steady-state expansion or replacement hiring. These mature institutions are likely balancing organic growth with strategic capability building, especially in digital and technology functions. <br><br>
+        <strong>CIBC (14.0)</strong> is near BMO, suggesting comparable hiring momentum. <br><br>
+        <strong>TD (6.9)</strong> stands out as a significant outlier. The very low hiring intensity may reflect either a strategic hiring pause or the aftermath of significant recent hiring. Given TD's known regulatory challenges (AML remediation program) during this period, the low intensity may indicate a focus on remediating existing processes rather than net hiring expansion.
+      </p>
+
+      <div class="cross-ref">
+        <strong>Strategic Interpretation</strong>
+        In a period of technological disruption, hiring intensity is a leading indicator of an institution's strategic posture. Low intensity during a growth market may signal confidence in automation (using technology to absorb volume with existing headcount) or constrained capital allocation.
+      </div>
+    </div>
+
+    <!-- SUBSECTION C: Technology Arms Race -->
+    <div class="analysis-subsection">
+      <h3>Technology Arms Race: The Digital Transformation Signal</h3>
+
+      <p class="analysis-narrative">
+        Technology hiring as a percentage of total recruitment reveals the intensity of digital transformation investments. The Big 5 cluster tightly around 13-19% of hiring, but with meaningful variation:
+      </p>
+
+      <div class="analysis-chart-container">
+        <div class="analysis-chart-title">Technology Hiring as % of Total</div>
+        <div style="display: flex; gap: 20px; align-items: flex-start;">
+          <div style="flex: 1; height: 250px;">
+            <canvas id="techPercentContainer"></canvas>
+          </div>
+          <div style="flex: 0.6; padding-top: 20px;">
+            <div class="toca-lob-grid" style="grid-template-columns: 1fr;">
+              <div class="toca-lob-item toca">
+                <div class="toca-lob-item-label">Tech Leaders</div>
+                <div class="toca-lob-item-list">
+                  <strong>RBC 19.1%</strong><br/>
+                  <strong>TD 17.2%</strong>
+                </div>
+              </div>
+              <div class="toca-lob-item lob">
+                <div class="toca-lob-item-label">Tech Followers</div>
+                <div class="toca-lob-item-list">
+                  <strong>CIBC 16.4%</strong><br/>
+                  <strong>BMO 14.3%</strong><br/>
+                  <strong>Scotiabank 13.1%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="analysis-narrative">
+        <strong>RBC's 19.1%</strong> reflects its aggressive investments in digital banking, cloud infrastructure, and AI research. RBC has publicly committed to significant technology modernization and innovation labs. <br><br>
+        <strong>TD's 17.2%</strong> aligns with its digital banking investments but may also reflect hiring to support the AML remediation technology workstream. <br><br>
+        <strong>BMO's 14.3%</strong> is notably lower, which may indicate either (a) earlier completion of technology stack modernization, (b) higher confidence in automation reducing net hiring, or (c) strategic prioritization of other capability areas.
+      </p>
+
+      <div class="cross-ref">
+        <strong>WARLAB Context: Technology Task Inventory</strong>
+        The WARLAB Task Inventory identified 157 technology-specific tasks across Canadian banks. Of these, 80% are classified as "augment" (AI-enhanced rather than AI-replaced), suggesting that technology hiring is likely to accelerate even as AI capabilities grow. Technology roles are shifting from pure development toward AI integration, prompt engineering, and intelligent system management — requiring continuous recruitment.
+      </div>
+
+      <p class="analysis-narrative">
+        A structural implication: all major Canadian banks are locking in a baseline of ~15% technology spend on hiring and operations. This creates structural cost pressure on efficiency ratios and may partly explain the competitive interest in cost-reduction through automation and outsourcing in non-technology functions.
+      </p>
+    </div>
+
+    <!-- SUBSECTION D: AI Exposure -->
+    <div class="analysis-subsection">
+      <h3>AI Exposure by Function: Where Automation Will Hit Hardest</h3>
+
+      <p class="analysis-narrative">
+        The WARLAB Task Inventory assessed 1,545 tasks across 15 functions, scoring each on AI automation readiness (0–100). The results show stark differences in automation exposure across the hiring landscape:
+      </p>
+
+      <div class="analysis-chart-container">
+        <div class="analysis-chart-title">AI Automation Readiness by Function (Mean Score)</div>
+        <div style="height: 400px;">
+          <canvas id="aiExposureChart"></canvas>
+        </div>
+      </div>
+
+      <p class="analysis-narrative">
+        <strong>High Automation Exposure (55+)</strong>: Operations (60.5), Retail Banking (57.8), and Corporate Real Estate (52.7) have the highest mean automation scores. These are largely process-driven, repetitive functions where AI can meaningfully augment or automate workflows. <br><br>
+        <strong>Moderate Exposure (48–54)</strong>: Technology (51.3), Finance (51.3), and Marketing (52.0) sit in the middle — significant automation potential, but heavily moderated by judgment, design, and strategy requirements. <br><br>
+        <strong>Low Exposure (40–47)</strong>: Legal (40.1), Investment Banking (42.2), and Risk Management (45.6) score lowest, reflecting their judgment-intensive, relationship-driven nature. While AI can augment legal research and risk analysis, replacing these roles wholesale is unlikely in the near term.
+      </p>
+
+      <div class="finding">
+        <div class="finding-label">Key Finding</div>
+        <h4>Automation and Hiring Seem Inversely Correlated</h4>
+        <p>The functions with the highest automation readiness (Operations at 60.5, Retail at 57.8) are being hired at elevated rates across the Big 5. This apparent paradox reflects a hiring cycle lag: institutions are expanding headcount in functions that will be most exposed to automation in the next 2–5 years. This suggests either (a) confidence that automation will handle volume growth with existing+new hires, or (b) a lag in recognizing automation risk and adjusting hiring plans downward.</p>
+      </div>
+
+      <p class="analysis-narrative">
+        Implication for institutional strategy: Retail and Operations hiring today may represent a "last wave" before consolidation. Institutions should closely track conversion of hires into fully productive roles; if productivity gains from AI augmentation materialize faster than expected, newly hired employees could face rapid consolidation pressures.
+      </p>
+    </div>
+
+    <!-- SUBSECTION E: Strategic Signals -->
+    <div class="analysis-subsection">
+      <h3>Strategic Signals: Reading Between the Lines</h3>
+
+      <p class="analysis-narrative">
+        The hiring landscape tells a story of five institutions navigating digital transformation, regulatory complexity, and competitive disruption at very different speeds and scales. Four key signals emerge:
+      </p>
+
+      <div class="signal-cards">
+        <div class="signal-card">
+          <h4>Signal 1: Scotiabank's Restructuring Surge</h4>
+          <p>Highest hiring intensity (21.0), highest TOCA % (42.3%), and elevated hiring in Retail and Global Banking suggest active organizational transformation. This is consistent with a period of strategic repositioning and new leadership focus on international growth and digital-first capabilities.</p>
+        </div>
+
+        <div class="signal-card">
+          <h4>Signal 2: TD's Strategic Pause</h4>
+          <p>Lowest hiring intensity (6.9 per 1,000) may reflect the immediate aftermath of the AML remediation crisis. While technology hiring remains solid (17.2%), overall recruitment restraint suggests a "fix first, grow second" stance — plausible for an institution addressing regulatory remediation.</p>
+        </div>
+
+        <div class="signal-card">
+          <h4>Signal 3: The Technology Tax</h4>
+          <p>All five banks are allocating 13–19% of hiring to technology. This structural cost base is unlikely to shrink. As technology hiring becomes table stakes, competitive pressure may shift to automation and AI augmentation of non-technology functions to preserve margin.</p>
+        </div>
+
+        <div class="signal-card">
+          <h4>Signal 4: The AI Paradox</h4>
+          <p>Banks are hiring most aggressively in Retail and Operations — the functions with the highest automation readiness. This lag between automation exposure and hiring decisions suggests institutions may be underestimating the near-term impact of AI, or betting on a "productivity surge" model where AI helps fewer people handle more volume.</p>
+        </div>
+      </div>
+
+      <p class="analysis-narrative" style="margin-top: 40px;">
+        <strong>Conclusion:</strong> The Big 5 Canadian bank hiring landscape reveals five distinct institutional postures emerging in response to technological disruption. Scotiabank appears to be in "transformation mode," TD in "remediation mode," and RBC/BMO/CIBC in "steady-state growth mode." The common thread across all five: significant investment in technology infrastructure, moderate-to-high TOCA functions, and rising exposure to AI automation in process-driven roles. How institutions navigate this transition — particularly the timing and magnitude of automation adoption relative to new hiring — will be a key competitive differentiator in the next 18–36 months.
+      </p>
     </div>
   </section>
 
@@ -1603,6 +2019,206 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: { x: { beginAtZero: true } }
+      }
+    });
+
+    // ========== ANALYSIS CHARTS ==========
+
+    // TOCA/LOB Classification
+    const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate', 'Insurance'];
+    const lobCategories = ['Retail', 'Commercial', 'Banking', 'Client', 'Wealth', 'Capital', 'Investment', 'Advisory', 'Global'];
+
+    function classifyFunction(categoryName) {
+      const lowerName = categoryName.toLowerCase();
+      const isToca = tocaCategories.some(cat => lowerName.includes(cat.toLowerCase()));
+      const isLob = lobCategories.some(cat => lowerName.includes(cat.toLowerCase()));
+      // If both or neither, default to LOB for commercial functions
+      if (isLob && !isToca) return 'LOB';
+      if (isToca && !isLob) return 'TOCA';
+      // Ambiguous: check specific patterns
+      if (lowerName.includes('customer') || lowerName.includes('service') || lowerName.includes('sales') || lowerName.includes('advice')) return 'LOB';
+      return 'TOCA'; // Default to TOCA for support/operations
+    }
+
+    // Calculate TOCA/LOB distribution for each bank
+    const tocaLobData = {};
+    const banks = ['BMO', 'RBC', 'TD', 'CIBC', 'Scotiabank'];
+
+    banks.forEach(bank => {
+      const bankData = aggregateData.banks[bank];
+      let tocaTotal = 0, lobTotal = 0;
+
+      Object.entries(bankData.categories).forEach(([category, count]) => {
+        const classification = classifyFunction(category);
+        if (classification === 'TOCA') {
+          tocaTotal += count;
+        } else {
+          lobTotal += count;
+        }
+      });
+
+      const total = tocaTotal + lobTotal;
+      tocaLobData[bank] = {
+        toca: tocaTotal,
+        lob: lobTotal,
+        tocaPercent: (tocaTotal / total * 100).toFixed(1),
+        lobPercent: (lobTotal / total * 100).toFixed(1),
+        total: total
+      };
+    });
+
+    // TOCA vs LOB Stacked Bar Chart
+    const tocaLobCtx = document.getElementById('tocaLobChart').getContext('2d');
+    new Chart(tocaLobCtx, {
+      type: 'bar',
+      data: {
+        labels: banks,
+        datasets: [
+          {
+            label: 'TOCA (Support Functions)',
+            data: banks.map(b => parseFloat(tocaLobData[b].tocaPercent)),
+            backgroundColor: '#2E5C8A',
+            borderRadius: 6
+          },
+          {
+            label: 'LOB (Revenue Functions)',
+            data: banks.map(b => parseFloat(tocaLobData[b].lobPercent)),
+            backgroundColor: '#E64100',
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true, beginAtZero: true, max: 100 },
+          y: { stacked: true }
+        },
+        plugins: {
+          legend: { position: 'top' },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.x.toFixed(1)}%`
+            }
+          }
+        }
+      }
+    });
+
+    // Hiring Intensity Detail Chart
+    const intensityData = {
+      'Scotiabank': (1887 / 90000 * 1000).toFixed(1),
+      'RBC': (1404 / 92000 * 1000).toFixed(1),
+      'BMO': (687 / 46000 * 1000).toFixed(1),
+      'CIBC': (659 / 47000 * 1000).toFixed(1),
+      'TD': (652 / 95000 * 1000).toFixed(1)
+    };
+
+    const intensityDetailCtx = document.getElementById('intensityDetailChart').getContext('2d');
+    new Chart(intensityDetailCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(intensityData),
+        datasets: [{
+          label: 'Roles per 1,000 FTE',
+          data: Object.values(intensityData),
+          backgroundColor: '#5B92C6',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: { x: { beginAtZero: true } }
+      }
+    });
+
+    // Tech Hiring as % of Total
+    const techPercents = {
+      'RBC': (268 / 1404 * 100).toFixed(1),
+      'TD': (112 / 652 * 100).toFixed(1),
+      'CIBC': (108 / 659 * 100).toFixed(1),
+      'BMO': (98 / 687 * 100).toFixed(1),
+      'Scotiabank': (248 / 1887 * 100).toFixed(1)
+    };
+
+    const techCtx = document.getElementById('techPercentContainer').getContext('2d');
+    new Chart(techCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(techPercents),
+        datasets: [{
+          label: 'Tech % of Total Hiring',
+          data: Object.values(techPercents),
+          backgroundColor: '#E64100',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true, max: 25 } }
+      }
+    });
+
+    // AI Exposure by Function (using WARLAB scores)
+    const aiScores = [
+      { function: 'Operations', score: 60.5 },
+      { function: 'Retail Banking', score: 57.8 },
+      { function: 'Corporate Real Estate', score: 52.7 },
+      { function: 'Technology', score: 51.3 },
+      { function: 'Finance & Treasury', score: 51.3 },
+      { function: 'Marketing', score: 52.0 },
+      { function: 'Data & Analytics', score: 51.3 },
+      { function: 'Compliance', score: 47.1 },
+      { function: 'Commercial Banking', score: 46.7 },
+      { function: 'Risk Management', score: 45.6 },
+      { function: 'Wealth Management', score: 45.5 },
+      { function: 'Investment Banking', score: 42.2 },
+      { function: 'Legal', score: 40.1 },
+      { function: 'Capital Markets', score: 50.0 }
+    ];
+
+    const sortedAiScores = aiScores.sort((a, b) => b.score - a.score);
+
+    const aiCtx = document.getElementById('aiExposureChart').getContext('2d');
+    new Chart(aiCtx, {
+      type: 'barh',
+      data: {
+        labels: sortedAiScores.map(d => d.function),
+        datasets: [{
+          label: 'AI Automation Readiness Score',
+          data: sortedAiScores.map(d => d.score),
+          backgroundColor: (ctx) => {
+            const score = ctx.raw;
+            if (score >= 55) return '#E64100'; // High
+            if (score >= 48) return '#5B92C6'; // Medium
+            return '#94A3B8'; // Low
+          },
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `Score: ${ctx.parsed.x.toFixed(1)}`
+            }
+          }
+        },
+        scales: { x: { beginAtZero: true, max: 70 } }
       }
     });
 
