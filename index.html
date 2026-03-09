@@ -2023,7 +2023,7 @@
     });
 
     // ========== ANALYSIS CHARTS ==========
-    try {
+    (function() {
 
     // TOCA/LOB Classification
     const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate', 'Insurance'];
@@ -2069,7 +2069,6 @@
     });
 
     // TOCA vs LOB Stacked Bar Chart
-    try {
     const tocaLobCtx = document.getElementById('tocaLobChart').getContext('2d');
     new Chart(tocaLobCtx, {
       type: 'bar',
@@ -2109,10 +2108,7 @@
       }
     });
 
-    } catch(e) { console.error('TOCA chart error:', e); }
-
     // Hiring Intensity Detail Chart
-    try {
     const intensityPerFTE = {
       'Scotiabank': Math.round(1887 / 90000 * 1000 * 10) / 10,
       'RBC': Math.round(1404 / 92000 * 1000 * 10) / 10,
@@ -2144,10 +2140,7 @@
       }
     });
 
-    } catch(e) { console.error('Intensity chart error:', e); }
-
     // Tech Hiring as % of Total
-    try {
     const techPercents = {
       'RBC': Math.round(268 / 1404 * 1000) / 10,
       'TD': Math.round(112 / 652 * 1000) / 10,
@@ -2177,10 +2170,7 @@
       }
     });
 
-    } catch(e) { console.error('Tech percent chart error:', e); }
-
     // AI Exposure by Function (using WARLAB scores)
-    try {
     const aiScores = [
       { function: 'Operations', score: 60.5 },
       { function: 'Retail Banking', score: 57.8 },
@@ -2233,9 +2223,7 @@
       }
     });
 
-    } catch(e) { console.error('AI exposure chart error:', e); }
-
-    } catch(e) { console.error('Analysis section error:', e); }
+    })();
 
     // Initialize explorer
     updateExplorer();
