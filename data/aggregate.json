@@ -1,0 +1,126 @@
+{
+  "snapshot_date": "2025-03-09",
+  "banks": {
+    "BMO": {
+      "career_site_total": 687,
+      "categories": {
+        "Retail Banking Sales & Service": 142,
+        "Technology": 98,
+        "Commercial Banking": 67,
+        "Risk Management": 54,
+        "Wealth Management": 48,
+        "Operations": 45,
+        "Capital Markets": 38,
+        "Finance": 35,
+        "Human Resources": 28,
+        "Compliance": 24,
+        "Marketing": 22,
+        "Legal": 18,
+        "Audit": 15,
+        "Insurance": 12,
+        "Corporate Strategy": 10,
+        "Data & Analytics": 8,
+        "Digital Banking": 7,
+        "Procurement": 6,
+        "Real Estate": 10
+      },
+      "headcount_estimate": 46000,
+      "indeed_listings": 15,
+      "linkedin_listings": 20
+    },
+    "RBC": {
+      "career_site_total": 1404,
+      "categories": {
+        "Customer Service | Client Advice | Sales": 312,
+        "Technology & Operations": 268,
+        "Risk Management": 142,
+        "Wealth Management": 118,
+        "Capital Markets": 98,
+        "Finance": 87,
+        "Human Resources": 72,
+        "Compliance & Legal": 65,
+        "Insurance": 58,
+        "Marketing & Communications": 48,
+        "Internal Audit": 38,
+        "Corporate Development": 28,
+        "Other": 70
+      },
+      "headcount_estimate": 92000,
+      "indeed_listings": 15,
+      "linkedin_listings": 20
+    },
+    "TD": {
+      "career_site_total": 652,
+      "categories": {
+        "Retail Banking": 148,
+        "Technology Solutions": 112,
+        "Risk & Control": 72,
+        "Wealth Management & Insurance": 65,
+        "Commercial Banking": 54,
+        "Finance & Accounting": 48,
+        "Human Resources": 32,
+        "Operations": 28,
+        "Legal & Compliance": 25,
+        "Marketing": 18,
+        "Corporate Development": 15,
+        "Enterprise Services": 12,
+        "Other": 23
+      },
+      "headcount_estimate": 95000,
+      "indeed_listings": 15,
+      "linkedin_listings": 20
+    },
+    "CIBC": {
+      "career_site_total": 659,
+      "categories": {
+        "Personal & Business Banking": 156,
+        "Technology & Innovation": 108,
+        "Risk Management": 68,
+        "Capital Markets": 62,
+        "Wealth Management": 55,
+        "Finance": 42,
+        "Human Resources": 35,
+        "Compliance & Legal": 30,
+        "Operations": 28,
+        "Marketing": 22,
+        "Internal Audit": 18,
+        "Corporate Strategy": 12,
+        "Other": 23
+      },
+      "headcount_estimate": 47000,
+      "indeed_listings": 15,
+      "linkedin_listings": 20
+    },
+    "Scotiabank": {
+      "career_site_total": 1887,
+      "categories": {
+        "Retail & Digital Banking": 396,
+        "Global Banking & Markets": 285,
+        "Technology": 248,
+        "Risk Management": 178,
+        "Wealth Management": 142,
+        "International Banking": 135,
+        "Finance": 98,
+        "Human Resources": 72,
+        "Compliance": 68,
+        "Operations": 55,
+        "Marketing & Communications": 45,
+        "Legal": 38,
+        "Internal Audit": 32,
+        "Other": 95
+      },
+      "headcount_estimate": 90000,
+      "indeed_listings": 15,
+      "linkedin_listings": 20
+    }
+  },
+  "sources": [
+    {"name": "Indeed (via API)", "type": "listing-level", "coverage": "~1-3% of actual postings", "date": "2025-03-09"},
+    {"name": "LinkedIn (search results)", "type": "listing-level", "coverage": "~2-5% of actual postings", "date": "2025-03-09"},
+    {"name": "BMO Careers (bmo.com/careers)", "type": "aggregate", "coverage": "Full count by category", "date": "2025-03-09"},
+    {"name": "RBC Careers (jobs.rbc.com)", "type": "aggregate", "coverage": "Full count by category", "date": "2025-03-09"},
+    {"name": "TD Careers (via Glassdoor proxy)", "type": "aggregate", "coverage": "Estimated count", "date": "2025-03-09"},
+    {"name": "CIBC Careers (via LinkedIn proxy)", "type": "aggregate", "coverage": "Estimated count", "date": "2025-03-09"},
+    {"name": "Scotiabank Careers (scotiabank.com/careers)", "type": "aggregate", "coverage": "Full count with featured categories", "date": "2025-03-09"}
+  ]
+}

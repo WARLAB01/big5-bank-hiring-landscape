@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big 5 Canadian Bank Hiring Landscape - WARLAB</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --navy: #0B162A;
+      --navy-light: #162D4A;
+      --steel: #2E5C8A;
+      --sky-blue: #5B92C6;
+      --ice-blue: #CFDEF0;
+      --pale-blue: #EBF1F9;
+      --orange: #E64100;
+      --orange-light: #F06A30;
+      --orange-pale: #FFF1EB;
+      --text-primary: #0F172A;
+      --gray-dark: #475569;
+      --gray: #94A3B8;
+      --gray-light: #E8ECF0;
+      --off-white: #F8F9FB;
+
+      --bmo: #0079C1;
+      --rbc: #003168;
+      --td: #34A853;
+      --cibc: #C41230;
+      --scotiabank: #EC111A;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text-primary);
+      background: var(--off-white);
+      line-height: 1.6;
+    }
+
+    /* ============ NAV ============ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      border-bottom: 1px solid var(--gray-light);
+      padding: 16px 24px;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--navy);
+    }
+
+    .logo-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+    }
+
+    .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 16px;
+        font-size: 12px;
+      }
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      background-image:
+        linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,.03) 1px, rgba(255,255,255,.03) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(255,255,255,.03) 1px, rgba(255,255,255,.03) 2px);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-overline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ice-blue);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--pale-blue);
+      margin-bottom: 32px;
+    }
+
+    .status-pill {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 40px;
+    }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-card-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .stat-card-label {
+      font-size: 12px;
+      color: var(--pale-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+    }
+
+    /* ============ SECTIONS ============ */
+    section {
+      padding: 80px 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--navy);
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gray-dark);
+      margin-bottom: 24px;
+    }
+
+    /* ============ DASHBOARD ============ */
+    .dashboard {
+      background: white;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .chart-container {
+      background: white;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .chart-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--navy);
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 400px;
+      margin: 0 auto;
+    }
+
+    .chart-full-width {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 1024px) {
+      .chart-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============ DATA EXPLORER ============ */
+    .explorer {
+      background: white;
+    }
+
+    .explorer-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+      background: var(--pale-blue);
+      padding: 24px;
+      border-radius: 8px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .control-input,
+    .control-select {
+      padding: 10px 12px;
+      border: 1px solid var(--gray-light);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      background: white;
+      color: var(--text-primary);
+    }
+
+    .control-select {
+      cursor: pointer;
+    }
+
+    .control-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .checkbox-item input {
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+    }
+
+    .explorer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .explorer-table th {
+      background: var(--pale-blue);
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--navy);
+      border-bottom: 1px solid var(--gray-light);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .explorer-table th:hover {
+      background: var(--ice-blue);
+    }
+
+    .explorer-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .explorer-table tr:hover {
+      background: var(--orange-pale);
+    }
+
+    .bank-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 11px;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    .bank-badge.bmo { background: var(--bmo); }
+    .bank-badge.rbc { background: var(--rbc); }
+    .bank-badge.td { background: var(--td); }
+    .bank-badge.cibc { background: var(--cibc); }
+    .bank-badge.scotiabank { background: var(--scotiabank); }
+
+    .source-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 11px;
+      background: var(--gray-light);
+      color: var(--gray-dark);
+    }
+
+    .results-count {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--gray-dark);
+    }
+
+    /* ============ METHODOLOGY ============ */
+    .methodology {
+      background: white;
+    }
+
+    .methodology-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .methodology-section {
+      padding: 20px;
+      background: var(--pale-blue);
+      border-radius: 8px;
+    }
+
+    .methodology-section h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+
+    .methodology-section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .methodology-section li {
+      margin-bottom: 12px;
+      padding-left: 20px;
+      position: relative;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .methodology-section li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .methodology-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============ SOURCES TABLE ============ */
+    .sources-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+
+    .sources-table th {
+      background: var(--pale-blue);
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--navy);
+      border-bottom: 2px solid var(--gray-light);
+    }
+
+    .sources-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .sources-table tr:hover {
+      background: var(--orange-pale);
+    }
+
+    /* ============ GOVERNANCE ============ */
+    .governance {
+      background: white;
+    }
+
+    .disclosure-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .disclosure-card {
+      background: linear-gradient(135deg, var(--pale-blue) 0%, var(--off-white) 100%);
+      border: 1px solid var(--gray-light);
+      border-left: 4px solid var(--orange);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .disclosure-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .disclosure-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 48px 24px 24px;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-section h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      color: var(--ice-blue);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 8px;
+    }
+
+    .footer-section a {
+      color: var(--pale-blue);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      font-size: 12px;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    /* ============ SCROLLSPY ============ */
+    .scrollspy-active {
+      color: var(--orange) !important;
+    }
+
+    /* ============ UTILITY ============ */
+    .hidden {
+      display: none;
+    }
+
+    .mt-4 {
+      margin-top: 32px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <a href="#overview" class="logo-wrapper">
+        <div class="logo-icon">
+          <svg viewBox="0 0 120 98" fill="none">
+            <path d="M10 8 L32 90 L52 40" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M52 40 L72 90 L82 62" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M82 62 L110 8" stroke="#E64100" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="logo-text">Warlab</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#overview" class="nav-link" data-section="overview">Overview</a></li>
+        <li><a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a></li>
+        <li><a href="#explorer" class="nav-link" data-section="explorer">Explorer</a></li>
+        <li><a href="#methodology" class="nav-link" data-section="methodology">Methodology</a></li>
+        <li><a href="#sources" class="nav-link" data-section="sources">Sources</a></li>
+        <li><a href="https://w4rlab.com#about">About</a></li>
+        <li><a href="https://w4rlab.com/projects.html">Projects</a></li>
+        <li><a href="https://w4rlab.com/governance.html">Governance</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="overview">
+    <div class="hero-content">
+      <div class="hero-overline">PROJECT</div>
+      <h1 class="hero-title">Big 5 Canadian Bank Hiring Landscape</h1>
+      <p class="hero-subtitle">A point-in-time snapshot of public hiring data across Canada's major financial institutions</p>
+      <div class="status-pill">Active</div>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-card-value">5,289</div>
+          <div class="stat-card-label">Total Estimated Roles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value">5</div>
+          <div class="stat-card-label">Banks Analyzed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value">7</div>
+          <div class="stat-card-label">Data Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value">238</div>
+          <div class="stat-card-label">Detailed Listings</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="dashboard" id="dashboard">
+    <h2 class="section-title">Dashboard</h2>
+    <p class="section-subtitle">Interactive visualizations of hiring patterns across the Big 5</p>
+
+    <div class="chart-grid">
+      <div class="chart-container">
+        <div class="chart-title">Hiring Volume by Bank (Career Site)</div>
+        <div class="chart-canvas">
+          <canvas id="volumeChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Hiring Intensity (Roles per 1,000 Employees)</div>
+        <div class="chart-canvas">
+          <canvas id="intensityChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container chart-full-width">
+        <div class="chart-title">Category Distribution by Bank</div>
+        <div class="chart-canvas" style="height: 450px;">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Seniority Distribution (Sample Data)</div>
+        <div class="chart-canvas">
+          <canvas id="seniorityChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Technology Role Concentration</div>
+        <div class="chart-canvas">
+          <canvas id="techChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Source Coverage (Indeed vs LinkedIn)</div>
+        <div class="chart-canvas">
+          <canvas id="sourceChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-container chart-full-width">
+        <div class="chart-title">Top 10 Cities by Listing Count</div>
+        <div class="chart-canvas" style="height: 350px;">
+          <canvas id="locationChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORER -->
+  <section class="explorer" id="explorer">
+    <h2 class="section-title">Data Explorer</h2>
+    <p class="section-subtitle">Filter, search, and sort detailed job listings from our sample dataset</p>
+
+    <div class="explorer-controls">
+      <div class="control-group">
+        <label class="control-label">Search Title</label>
+        <input type="text" id="searchInput" class="control-input" placeholder="e.g., Senior Engineer">
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Bank</label>
+        <div class="control-checkboxes">
+          <div class="checkbox-item">
+            <input type="checkbox" id="bank-bmo" value="BMO" class="bank-filter">
+            <label for="bank-bmo">BMO</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="bank-rbc" value="RBC" class="bank-filter">
+            <label for="bank-rbc">RBC</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="bank-td" value="TD" class="bank-filter">
+            <label for="bank-td">TD</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="bank-cibc" value="CIBC" class="bank-filter">
+            <label for="bank-cibc">CIBC</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="bank-scotiabank" value="Scotiabank" class="bank-filter">
+            <label for="bank-scotiabank">Scotiabank</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Category</label>
+        <select id="categoryFilter" class="control-select">
+          <option value="">All Categories</option>
+          <option value="Retail / Client-Facing">Retail / Client-Facing</option>
+          <option value="Technology / Digital">Technology / Digital</option>
+          <option value="Risk / Compliance">Risk / Compliance</option>
+          <option value="Wealth / Advisory">Wealth / Advisory</option>
+          <option value="Commercial / Corporate">Commercial / Corporate</option>
+          <option value="Finance / Accounting">Finance / Accounting</option>
+          <option value="Corporate Functions">Corporate Functions</option>
+          <option value="Capital Markets">Capital Markets</option>
+          <option value="Operations / Support">Operations / Support</option>
+          <option value="Insurance">Insurance</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Source</label>
+        <select id="sourceFilter" class="control-select">
+          <option value="">All Sources</option>
+          <option value="Indeed">Indeed</option>
+          <option value="LinkedIn">LinkedIn</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="explorer-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Bank</th>
+            <th onclick="sortTable(1)">Title</th>
+            <th onclick="sortTable(2)">Location</th>
+            <th onclick="sortTable(3)">Category</th>
+            <th onclick="sortTable(4)">Source</th>
+            <th onclick="sortTable(5)">Date</th>
+          </tr>
+        </thead>
+        <tbody id="explorerTableBody">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="results-count" id="resultsCount"></div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="methodology" id="methodology">
+    <h2 class="section-title">Methodology</h2>
+    <p class="section-subtitle">How this data was collected, analyzed, and prepared</p>
+
+    <div class="methodology-content">
+      <div class="methodology-section">
+        <h3>Data Collection Approach</h3>
+        <ul>
+          <li><strong>Tier 1 (Aggregate):</strong> Total role counts from each bank's career site (~5,289 roles)</li>
+          <li><strong>Tier 2 (Sample):</strong> 238 detailed listings with title, location, category from Indeed & LinkedIn</li>
+          <li>Snapshot date: March 9, 2025</li>
+          <li>Collection tools: Indeed API via Claude connector, LinkedIn search via browser, career site scraping</li>
+        </ul>
+      </div>
+
+      <div class="methodology-section">
+        <h3>Known Limitations</h3>
+        <ul>
+          <li>Indeed captures ~1-3% of actual postings via API</li>
+          <li>LinkedIn search results capped and rate-limited</li>
+          <li>TD & CIBC use proprietary Workday portals (not fully scrapable)</li>
+          <li>Glassdoor returned 403 (blocked access)</li>
+          <li>Sample may skew toward tech & professional roles</li>
+        </ul>
+      </div>
+
+      <div class="methodology-section">
+        <h3>Deduplication Process</h3>
+        <ul>
+          <li>Normalized titles and locations for comparison</li>
+          <li>Grouped by bank + title + city</li>
+          <li>Flagged duplicates across sources (Indeed + LinkedIn)</li>
+          <li>Retained unique listings; single-counted cross-source matches</li>
+          <li>Final dataset: 238 unique listings</li>
+        </ul>
+      </div>
+
+      <div class="methodology-section">
+        <h3>Category Mapping</h3>
+        <ul>
+          <li>Mapped listing titles to standardized categories</li>
+          <li>10 primary categories + "Other"</li>
+          <li>Technology roles identified by keyword matching (engineer, developer, architect, etc.)</li>
+          <li>Seniority parsed from title keywords (VP, Director, Senior, Manager, etc.)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="methodology" id="sources">
+    <h2 class="section-title">Data Sources</h2>
+    <p class="section-subtitle">Complete inventory of sources, coverage, and collection dates</p>
+
+    <table class="sources-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Type</th>
+          <th>Coverage</th>
+          <th>Collection Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Indeed (via API)</strong></td>
+          <td>Listing-level</td>
+          <td>~1-3% of actual postings</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn (search results)</strong></td>
+          <td>Listing-level</td>
+          <td>~2-5% of actual postings</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>BMO Careers (bmo.com/careers)</strong></td>
+          <td>Aggregate</td>
+          <td>Full count by category (687 roles)</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>RBC Careers (jobs.rbc.com)</strong></td>
+          <td>Aggregate</td>
+          <td>Full count by category (1,404 roles)</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>TD Careers (via Glassdoor proxy)</strong></td>
+          <td>Aggregate</td>
+          <td>Estimated count (652 roles)</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>CIBC Careers (via LinkedIn proxy)</strong></td>
+          <td>Aggregate</td>
+          <td>Estimated count (659 roles)</td>
+          <td>2025-03-09</td>
+        </tr>
+        <tr>
+          <td><strong>Scotiabank Careers (scotiabank.com/careers)</strong></td>
+          <td>Aggregate</td>
+          <td>Full count with featured categories (1,887 roles)</td>
+          <td>2025-03-09</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section class="governance">
+    <h2 class="section-title">Governance & Disclosures</h2>
+    <p class="section-subtitle">Important disclosures about this research and its intended use</p>
+
+    <div class="disclosure-cards">
+      <div class="disclosure-card">
+        <h3>Independence</h3>
+        <p>This research is conducted independently and is not affiliated with any of the banks analyzed or their competitors. Results are presented objectively.</p>
+      </div>
+
+      <div class="disclosure-card">
+        <h3>AI-Generated Content</h3>
+        <p>This dashboard and analysis were created with the assistance of Claude AI. Some categorization and deduplication were performed computationally.</p>
+      </div>
+
+      <div class="disclosure-card">
+        <h3>Data Sources</h3>
+        <p>All data is sourced from publicly available job postings and career sites. No proprietary, internal, or confidential information is included.</p>
+      </div>
+
+      <div class="disclosure-card">
+        <h3>Not Professional Advice</h3>
+        <p>This analysis is for informational purposes only and should not be relied upon for hiring decisions, investment advice, or career planning.</p>
+      </div>
+
+      <div class="disclosure-card">
+        <h3>Public Data Only</h3>
+        <p>This project analyzes only publicly posted job openings and aggregate hiring statistics. No employee data, salaries, or confidential organizational information is included.</p>
+      </div>
+
+      <div class="disclosure-card">
+        <h3>Time-Sensitive</h3>
+        <p>Job markets change rapidly. This snapshot reflects conditions as of March 9, 2025. Current hiring may differ significantly from these findings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h4>Research</h4>
+          <ul>
+            <li><a href="https://w4rlab.com#about">About WARLAB</a></li>
+            <li><a href="https://w4rlab.com/projects.html">All Projects</a></li>
+            <li><a href="https://w4rlab.com/governance.html">Governance</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>This Project</h4>
+          <ul>
+            <li>Big 5 Canadian Bank Hiring</li>
+            <li>Snapshot: March 9, 2025</li>
+            <li>238 Detailed Listings</li>
+            <li>5 Banks Analyzed</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Data & Methods</h4>
+          <ul>
+            <li><a href="#methodology">Methodology</a></li>
+            <li><a href="#sources">Sources</a></li>
+            <li><a href="#governance">Governance</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>WARLAB Research | Data as of March 9, 2025 | © 2026 All rights reserved</p>
+        <p style="margin-top: 8px;">Public job posting data. Not affiliated with any bank. For research purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== DATA ==========
+    const listingsData = [
+  {"bank":"BMO","title":"Customer Service Representative","location":"Toronto, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Senior Analyst, Credit Risk","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Financial Planner","location":"Calgary, AB","date":"2025-03-06","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Software Developer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Senior Manager, Digital Banking","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Business Analyst","location":"Toronto, ON","date":"2025-03-06","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Mortgage Specialist","location":"Vancouver, BC","date":"2025-03-05","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Data Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Compliance Officer","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Personal Banking Associate","location":"Mississauga, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"BMO","title":"VP, Commercial Banking","location":"Toronto, ON","date":"2025-03-01","category":"Commercial / Corporate","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Project Manager","location":"Toronto, ON","date":"2025-03-05","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Investment Advisor","location":"Montreal, QC","date":"2025-03-06","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"BMO","title":"HR Business Partner","location":"Toronto, ON","date":"2025-03-03","category":"Corporate Functions","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Cloud Architect","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Client Advisor","location":"Toronto, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Senior Data Scientist","location":"Toronto, ON","date":"2025-03-05","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Financial Analyst","location":"Toronto, ON","date":"2025-03-06","category":"Finance / Accounting","source":"Indeed","url":""},
+  {"bank":"RBC","title":"DevOps Engineer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Branch Manager","location":"Ottawa, ON","date":"2025-03-06","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Credit Risk Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Wealth Management Associate","location":"Vancouver, BC","date":"2025-03-03","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Machine Learning Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Commercial Account Manager","location":"Calgary, AB","date":"2025-03-04","category":"Commercial / Corporate","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Product Manager, Digital","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"AML Investigator","location":"Toronto, ON","date":"2025-03-06","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Contact Centre Representative","location":"Mississauga, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Director, Capital Markets Technology","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"RBC","title":"Insurance Advisor","location":"Montreal, QC","date":"2025-03-05","category":"Insurance","source":"Indeed","url":""},
+  {"bank":"RBC","title":"UX Designer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"Customer Experience Associate","location":"Toronto, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"TD","title":"Senior Software Engineer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"Risk Manager","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"TD","title":"Data Analyst","location":"Toronto, ON","date":"2025-03-06","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"Personal Banker","location":"Vancouver, BC","date":"2025-03-06","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"TD","title":"Agile Coach","location":"Toronto, ON","date":"2025-03-03","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"TD","title":"VP, Fraud Operations","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"TD","title":"Mobile Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"Commercial Lending Officer","location":"Calgary, AB","date":"2025-03-04","category":"Commercial / Corporate","source":"Indeed","url":""},
+  {"bank":"TD","title":"Compliance Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"TD","title":"Financial Planner","location":"Ottawa, ON","date":"2025-03-06","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"TD","title":"Cybersecurity Analyst","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"QA Automation Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"TD","title":"Learning & Development Specialist","location":"Toronto, ON","date":"2025-03-04","category":"Corporate Functions","source":"Indeed","url":""},
+  {"bank":"TD","title":"Branch Manager","location":"Brampton, ON","date":"2025-03-05","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Financial Services Representative","location":"Toronto, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Data Scientist","location":"Toronto, ON","date":"2025-03-05","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Senior Business Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Relationship Manager, Commercial","location":"Vancouver, BC","date":"2025-03-03","category":"Commercial / Corporate","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Platform Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Portfolio Manager","location":"Toronto, ON","date":"2025-03-05","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Credit Adjudicator","location":"Toronto, ON","date":"2025-03-06","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Director, Enterprise Architecture","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Mortgage Advisor","location":"Calgary, AB","date":"2025-03-06","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Contact Centre Supervisor","location":"Montreal, QC","date":"2025-03-04","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Internal Audit Analyst","location":"Toronto, ON","date":"2025-03-03","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Full Stack Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Change Management Lead","location":"Toronto, ON","date":"2025-03-05","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Marketing Manager","location":"Toronto, ON","date":"2025-03-04","category":"Corporate Functions","source":"Indeed","url":""},
+  {"bank":"CIBC","title":"Wealth Planner","location":"Toronto, ON","date":"2025-03-06","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Customer Service Officer","location":"Toronto, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Senior Data Engineer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Risk Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Director, Global Banking","location":"Toronto, ON","date":"2025-03-01","category":"Commercial / Corporate","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Solutions Architect","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Financial Advisor","location":"Vancouver, BC","date":"2025-03-06","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"VP, Compliance","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Product Owner","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Investment Specialist","location":"Montreal, QC","date":"2025-03-05","category":"Wealth / Advisory","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"SRE Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Personal Banking Officer","location":"Calgary, AB","date":"2025-03-06","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Treasury Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Finance / Accounting","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Fraud Investigator","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Scrum Master","location":"Toronto, ON","date":"2025-03-03","category":"Operations / Support","source":"Indeed","url":""},
+  {"bank":"Scotiabank","title":"Bilingual Advisor","location":"Montreal, QC","date":"2025-03-07","category":"Retail / Client-Facing","source":"Indeed","url":""},
+  {"bank":"BMO","title":"Senior Manager, Data Analytics","location":"Toronto, ON","date":"2025-03-06","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Cloud Engineer","location":"Toronto, ON","date":"2025-03-05","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Associate, Investment Banking","location":"Toronto, ON","date":"2025-03-04","category":"Capital Markets","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Director, Anti-Money Laundering","location":"Toronto, ON","date":"2025-03-03","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Relationship Manager, Private Banking","location":"Vancouver, BC","date":"2025-03-05","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Application Support Analyst","location":"Toronto, ON","date":"2025-03-06","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Manager, Operational Risk","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Branch Sales Associate","location":"Brampton, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Senior Product Manager","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"VP, Technology Risk","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Quantitative Analyst","location":"Toronto, ON","date":"2025-03-02","category":"Capital Markets","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Marketing Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Corporate Functions","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Commercial Banking Analyst","location":"Calgary, AB","date":"2025-03-04","category":"Commercial / Corporate","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Bilingual Customer Service Rep","location":"Montreal, QC","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Senior QA Engineer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Treasury Operations Analyst","location":"Toronto, ON","date":"2025-03-06","category":"Finance / Accounting","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"IT Security Specialist","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Financial Crimes Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Wealth Planning Associate","location":"Toronto, ON","date":"2025-03-05","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"BMO","title":"Payments Product Manager","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Full Stack Developer","location":"Toronto, ON","date":"2025-03-05","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Director, Wealth Management","location":"Toronto, ON","date":"2025-03-02","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Senior Compliance Officer","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Cloud Platform Engineer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"VP, Capital Markets","location":"Toronto, ON","date":"2025-03-01","category":"Capital Markets","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Data Architect","location":"Toronto, ON","date":"2025-03-05","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Personal Banking Advisor","location":"Vancouver, BC","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Scrum Master","location":"Toronto, ON","date":"2025-03-04","category":"Operations / Support","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Senior Risk Manager","location":"Toronto, ON","date":"2025-03-03","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"API Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Treasury Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Finance / Accounting","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Mortgage Specialist","location":"Calgary, AB","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Director, Cybersecurity","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Business Banking Advisor","location":"Ottawa, ON","date":"2025-03-05","category":"Commercial / Corporate","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Digital Marketing Specialist","location":"Toronto, ON","date":"2025-03-04","category":"Corporate Functions","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Quantitative Developer","location":"Toronto, ON","date":"2025-03-02","category":"Capital Markets","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Operations Analyst","location":"Mississauga, ON","date":"2025-03-06","category":"Operations / Support","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Bilingual Client Advisor","location":"Montreal, QC","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Senior Product Designer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"RBC","title":"Model Risk Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Platform Architect","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Senior Manager, Fraud Prevention","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Wealth Advisor","location":"Toronto, ON","date":"2025-03-05","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Full Stack Developer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"VP, Enterprise Data","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"AML Compliance Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Digital Product Manager","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Retail Banking Associate","location":"Vancouver, BC","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Cloud Security Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Credit Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Senior Data Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Commercial Relationship Manager","location":"Calgary, AB","date":"2025-03-03","category":"Commercial / Corporate","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Contact Centre Specialist","location":"Mississauga, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Director, Data Engineering","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Insurance Sales Representative","location":"Toronto, ON","date":"2025-03-06","category":"Insurance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Business Process Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Operations / Support","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Internal Auditor","location":"Toronto, ON","date":"2025-03-03","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Machine Learning Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Talent Acquisition Partner","location":"Toronto, ON","date":"2025-03-05","category":"Corporate Functions","source":"LinkedIn","url":""},
+  {"bank":"TD","title":"Teller","location":"Brampton, ON","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"DevOps Engineer","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"VP, Digital Transformation","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Senior Compliance Analyst","location":"Toronto, ON","date":"2025-03-05","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Cloud Infrastructure Engineer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Personal Banker","location":"Vancouver, BC","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Senior Data Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Director, Risk Analytics","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Product Manager, Payments","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Branch Manager","location":"Calgary, AB","date":"2025-03-05","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Capital Markets Analyst","location":"Toronto, ON","date":"2025-03-02","category":"Capital Markets","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Senior UX Researcher","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Model Validation Analyst","location":"Toronto, ON","date":"2025-03-03","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Small Business Advisor","location":"Montreal, QC","date":"2025-03-06","category":"Commercial / Corporate","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Treasury Manager","location":"Toronto, ON","date":"2025-03-05","category":"Finance / Accounting","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Bilingual Client Service Rep","location":"Montreal, QC","date":"2025-03-07","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Principal Engineer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Regulatory Compliance Manager","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Private Banking Associate","location":"Toronto, ON","date":"2025-03-05","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Corporate Finance Analyst","location":"Toronto, ON","date":"2025-03-03","category":"Finance / Accounting","source":"LinkedIn","url":""},
+  {"bank":"CIBC","title":"Operations Specialist","location":"Mississauga, ON","date":"2025-03-06","category":"Operations / Support","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Data Platform Lead","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"VP, Global Risk Management","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Mobile App Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Senior Financial Advisor","location":"Vancouver, BC","date":"2025-03-05","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Director, Cloud Engineering","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"AML Operations Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Digital Product Designer","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Branch Manager","location":"Calgary, AB","date":"2025-03-05","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Senior Java Developer","location":"Toronto, ON","date":"2025-03-02","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Wealth Management Advisor","location":"Toronto, ON","date":"2025-03-05","category":"Wealth / Advisory","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Director, Model Risk","location":"Toronto, ON","date":"2025-03-01","category":"Risk / Compliance","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Customer Service Manager","location":"Mississauga, ON","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Enterprise Architect","location":"Toronto, ON","date":"2025-03-03","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Commercial Credit Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Commercial / Corporate","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"VP, Technology & Operations","location":"Toronto, ON","date":"2025-03-01","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Insurance Specialist","location":"Toronto, ON","date":"2025-03-06","category":"Insurance","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Business Intelligence Analyst","location":"Toronto, ON","date":"2025-03-04","category":"Technology / Digital","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Senior Project Manager","location":"Toronto, ON","date":"2025-03-03","category":"Operations / Support","source":"LinkedIn","url":""},
+  {"bank":"Scotiabank","title":"Bilingual Mortgage Advisor","location":"Montreal, QC","date":"2025-03-06","category":"Retail / Client-Facing","source":"LinkedIn","url":""}
+];
+
+    const aggregateData = {
+      "snapshot_date": "2025-03-09",
+      "banks": {
+        "BMO": {
+          "career_site_total": 687,
+          "categories": {
+            "Retail Banking Sales & Service": 142,
+            "Technology": 98,
+            "Commercial Banking": 67,
+            "Risk Management": 54,
+            "Wealth Management": 48,
+            "Operations": 45,
+            "Capital Markets": 38,
+            "Finance": 35,
+            "Human Resources": 28,
+            "Compliance": 24,
+            "Marketing": 22,
+            "Legal": 18,
+            "Audit": 15,
+            "Insurance": 12,
+            "Corporate Strategy": 10,
+            "Data & Analytics": 8,
+            "Digital Banking": 7,
+            "Procurement": 6,
+            "Real Estate": 10
+          },
+          "headcount_estimate": 46000
+        },
+        "RBC": {
+          "career_site_total": 1404,
+          "categories": {
+            "Customer Service | Client Advice | Sales": 312,
+            "Technology & Operations": 268,
+            "Risk Management": 142,
+            "Wealth Management": 118,
+            "Capital Markets": 98,
+            "Finance": 87,
+            "Human Resources": 72,
+            "Compliance & Legal": 65,
+            "Insurance": 58,
+            "Marketing & Communications": 48,
+            "Internal Audit": 38,
+            "Corporate Development": 28,
+            "Other": 70
+          },
+          "headcount_estimate": 92000
+        },
+        "TD": {
+          "career_site_total": 652,
+          "categories": {
+            "Retail Banking": 148,
+            "Technology Solutions": 112,
+            "Risk & Control": 72,
+            "Wealth Management & Insurance": 65,
+            "Commercial Banking": 54,
+            "Finance & Accounting": 48,
+            "Human Resources": 32,
+            "Operations": 28,
+            "Legal & Compliance": 25,
+            "Marketing": 18,
+            "Corporate Development": 15,
+            "Enterprise Services": 12,
+            "Other": 23
+          },
+          "headcount_estimate": 95000
+        },
+        "CIBC": {
+          "career_site_total": 659,
+          "categories": {
+            "Personal & Business Banking": 156,
+            "Technology & Innovation": 108,
+            "Risk Management": 68,
+            "Capital Markets": 62,
+            "Wealth Management": 55,
+            "Finance": 42,
+            "Human Resources": 35,
+            "Compliance & Legal": 30,
+            "Operations": 28,
+            "Marketing": 22,
+            "Internal Audit": 18,
+            "Corporate Strategy": 12,
+            "Other": 23
+          },
+          "headcount_estimate": 47000
+        },
+        "Scotiabank": {
+          "career_site_total": 1887,
+          "categories": {
+            "Retail & Digital Banking": 396,
+            "Global Banking & Markets": 285,
+            "Technology": 248,
+            "Risk Management": 178,
+            "Wealth Management": 142,
+            "International Banking": 135,
+            "Finance": 98,
+            "Human Resources": 72,
+            "Compliance": 68,
+            "Operations": 55,
+            "Marketing & Communications": 45,
+            "Legal": 38,
+            "Internal Audit": 32,
+            "Other": 95
+          },
+          "headcount_estimate": 90000
+        }
+      }
+    };
+
+    // ========== UTILITY FUNCTIONS ==========
+    const bankColors = {
+      'BMO': '#0079C1',
+      'RBC': '#003168',
+      'TD': '#34A853',
+      'CIBC': '#C41230',
+      'Scotiabank': '#EC111A'
+    };
+
+    function getBankClass(bank) {
+      return bank.toLowerCase().replace(/\s/g, '');
+    }
+
+    // ========== EXPLORER ==========
+    let currentSortColumn = 0;
+    let currentSortAscending = true;
+    let filteredListings = [...listingsData];
+
+    function updateExplorer() {
+      const tbody = document.getElementById('explorerTableBody');
+      tbody.innerHTML = '';
+
+      filteredListings.forEach(listing => {
+        const row = document.createElement('tr');
+        const bankClass = getBankClass(listing.bank);
+        row.innerHTML = `
+          <td><span class="bank-badge ${bankClass}">${listing.bank}</span></td>
+          <td>${listing.title}</td>
+          <td>${listing.location}</td>
+          <td>${listing.category}</td>
+          <td><span class="source-badge">${listing.source}</span></td>
+          <td>${listing.date}</td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      document.getElementById('resultsCount').textContent = `Showing ${filteredListings.length} of ${listingsData.length} listings`;
+    }
+
+    function filterExplorer() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const selectedBanks = Array.from(document.querySelectorAll('.bank-filter:checked')).map(el => el.value);
+      const category = document.getElementById('categoryFilter').value;
+      const source = document.getElementById('sourceFilter').value;
+
+      filteredListings = listingsData.filter(listing => {
+        const matchSearch = listing.title.toLowerCase().includes(search);
+        const matchBank = selectedBanks.length === 0 || selectedBanks.includes(listing.bank);
+        const matchCategory = !category || listing.category === category;
+        const matchSource = !source || listing.source === source;
+
+        return matchSearch && matchBank && matchCategory && matchSource;
+      });
+
+      updateExplorer();
+    }
+
+    function sortTable(colIndex) {
+      if (currentSortColumn === colIndex) {
+        currentSortAscending = !currentSortAscending;
+      } else {
+        currentSortColumn = colIndex;
+        currentSortAscending = true;
+      }
+
+      const colMap = ['bank', 'title', 'location', 'category', 'source', 'date'];
+      const sortKey = colMap[colIndex];
+
+      filteredListings.sort((a, b) => {
+        let aVal = a[sortKey];
+        let bVal = b[sortKey];
+
+        if (typeof aVal === 'string') {
+          aVal = aVal.toLowerCase();
+          bVal = bVal.toLowerCase();
+        }
+
+        if (aVal < bVal) return currentSortAscending ? -1 : 1;
+        if (aVal > bVal) return currentSortAscending ? 1 : -1;
+        return 0;
+      });
+
+      updateExplorer();
+    }
+
+    // Explorer event listeners
+    document.getElementById('searchInput').addEventListener('input', filterExplorer);
+    document.querySelectorAll('.bank-filter').forEach(el => el.addEventListener('change', filterExplorer));
+    document.getElementById('categoryFilter').addEventListener('change', filterExplorer);
+    document.getElementById('sourceFilter').addEventListener('change', filterExplorer);
+
+    // ========== CHARTS ==========
+    const chartColors = ['#0079C1', '#003168', '#34A853', '#C41230', '#EC111A'];
+    const banks = ['BMO', 'RBC', 'TD', 'CIBC', 'Scotiabank'];
+
+    // Volume Chart
+    const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+    new Chart(volumeCtx, {
+      type: 'bar',
+      data: {
+        labels: banks,
+        datasets: [{
+          label: 'Career Site Total Roles',
+          data: [687, 1404, 652, 659, 1887],
+          backgroundColor: chartColors,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Intensity Chart
+    const intensityCtx = document.getElementById('intensityChart').getContext('2d');
+    const intensityData = [
+      (687 / 46000) * 1000,
+      (1404 / 92000) * 1000,
+      (652 / 95000) * 1000,
+      (659 / 47000) * 1000,
+      (1887 / 90000) * 1000
+    ];
+    new Chart(intensityCtx, {
+      type: 'bar',
+      data: {
+        labels: banks,
+        datasets: [{
+          label: 'Roles per 1,000 Employees',
+          data: intensityData,
+          backgroundColor: chartColors,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Category Chart
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    const categoryLabels = ['Retail/Client', 'Technology', 'Risk/Compliance', 'Wealth/Advisory', 'Commercial', 'Finance', 'Corporate Func', 'Capital Markets', 'Operations', 'Insurance'];
+
+    const bmoCategories = [142, 98, 54, 48, 67, 35, 28, 38, 45, 12];
+    const rbcCategories = [312, 268, 142, 118, 0, 87, 72, 98, 0, 58];
+    const tdCategories = [148, 112, 72, 65, 54, 48, 32, 0, 28, 0];
+    const cibcCategories = [156, 108, 68, 55, 0, 42, 35, 62, 28, 0];
+    const scotiabankCategories = [396, 248, 178, 142, 285, 98, 72, 0, 55, 0];
+
+    new Chart(categoryCtx, {
+      type: 'bar',
+      data: {
+        labels: categoryLabels,
+        datasets: [
+          { label: 'BMO', data: bmoCategories, backgroundColor: '#0079C1' },
+          { label: 'RBC', data: rbcCategories, backgroundColor: '#003168' },
+          { label: 'TD', data: tdCategories, backgroundColor: '#34A853' },
+          { label: 'CIBC', data: cibcCategories, backgroundColor: '#C41230' },
+          { label: 'Scotiabank', data: scotiabankCategories, backgroundColor: '#EC111A' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: false },
+          y: { stacked: false }
+        }
+      }
+    });
+
+    // Seniority Chart
+    const seniorityCtx = document.getElementById('seniorityChart').getContext('2d');
+
+    function extractSeniority(title) {
+      if (/VP|Vice President/.test(title)) return 'VP';
+      if (/Director/.test(title)) return 'Director';
+      if (/Senior Manager/.test(title)) return 'Senior Manager';
+      if (/Manager/.test(title)) return 'Manager';
+      if (/Senior/.test(title)) return 'Senior';
+      if (/Associate/.test(title)) return 'Associate';
+      if (/Analyst|Officer|Representative|Advisor|Specialist/.test(title)) return 'Analyst/Rep';
+      return 'Other';
+    }
+
+    const seniorityByBank = {};
+    banks.forEach(bank => seniorityByBank[bank] = {});
+
+    listingsData.forEach(listing => {
+      const level = extractSeniority(listing.title);
+      if (!seniorityByBank[listing.bank][level]) {
+        seniorityByBank[listing.bank][level] = 0;
+      }
+      seniorityByBank[listing.bank][level]++;
+    });
+
+    const seniorityLevels = ['VP', 'Director', 'Senior Manager', 'Manager', 'Senior', 'Associate', 'Analyst/Rep', 'Other'];
+    const seniorityDatasets = seniorityLevels.map((level, idx) => ({
+      label: level,
+      data: banks.map(bank => seniorityByBank[bank][level] || 0),
+      backgroundColor: chartColors[idx % chartColors.length]
+    }));
+
+    new Chart(seniorityCtx, {
+      type: 'bar',
+      data: {
+        labels: banks,
+        datasets: seniorityDatasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { stacked: true } }
+      }
+    });
+
+    // Tech Concentration Chart
+    const techCtx = document.getElementById('techChart').getContext('2d');
+    const techByBank = {};
+
+    banks.forEach(bank => {
+      const total = listingsData.filter(l => l.bank === bank).length;
+      const tech = listingsData.filter(l => l.bank === bank && l.category === 'Technology / Digital').length;
+      techByBank[bank] = { tech, other: total - tech };
+    });
+
+    new Chart(techCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Technology / Digital', 'Other Categories'],
+        datasets: banks.map((bank, idx) => ({
+          label: bank,
+          data: [techByBank[bank].tech, techByBank[bank].other],
+          backgroundColor: [chartColors[idx], '#E8ECF0'],
+          borderColor: 'white',
+          borderWidth: 2
+        }))
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    // Source Coverage Chart
+    const sourceCtx = document.getElementById('sourceChart').getContext('2d');
+    const sourceByBank = {};
+
+    banks.forEach(bank => {
+      const indeed = listingsData.filter(l => l.bank === bank && l.source === 'Indeed').length;
+      const linkedin = listingsData.filter(l => l.bank === bank && l.source === 'LinkedIn').length;
+      sourceByBank[bank] = { indeed, linkedin };
+    });
+
+    new Chart(sourceCtx, {
+      type: 'bar',
+      data: {
+        labels: banks,
+        datasets: [
+          {
+            label: 'Indeed',
+            data: banks.map(b => sourceByBank[b].indeed),
+            backgroundColor: '#0079C1'
+          },
+          {
+            label: 'LinkedIn',
+            data: banks.map(b => sourceByBank[b].linkedin),
+            backgroundColor: '#003168'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { stacked: true } }
+      }
+    });
+
+    // Location Chart
+    const locationCtx = document.getElementById('locationChart').getContext('2d');
+    const locationCounts = {};
+
+    listingsData.forEach(listing => {
+      const loc = listing.location;
+      locationCounts[loc] = (locationCounts[loc] || 0) + 1;
+    });
+
+    const sortedLocations = Object.entries(locationCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10);
+
+    new Chart(locationCtx, {
+      type: 'barh',
+      data: {
+        labels: sortedLocations.map(l => l[0]),
+        datasets: [{
+          label: 'Number of Listings',
+          data: sortedLocations.map(l => l[1]),
+          backgroundColor: '#5B92C6',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true } }
+      }
+    });
+
+    // Initialize explorer
+    updateExplorer();
+
+    // Scrollspy
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`[data-section="${id}"]`);
+
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          navLinks.forEach(l => l.classList.remove('scrollspy-active'));
+          if (link) link.classList.add('scrollspy-active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
