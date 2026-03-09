@@ -2042,9 +2042,9 @@
 
     // Calculate TOCA/LOB distribution for each bank
     const tocaLobData = {};
-    const banks = ['BMO', 'RBC', 'TD', 'CIBC', 'Scotiabank'];
+    const analysisBanks = ['BMO', 'RBC', 'TD', 'CIBC', 'Scotiabank'];
 
-    banks.forEach(bank => {
+    analysisBanks.forEach(bank => {
       const bankData = aggregateData.banks[bank];
       let tocaTotal = 0, lobTotal = 0;
 
@@ -2072,17 +2072,17 @@
     new Chart(tocaLobCtx, {
       type: 'bar',
       data: {
-        labels: banks,
+        labels: analysisBanks,
         datasets: [
           {
             label: 'TOCA (Support Functions)',
-            data: banks.map(b => parseFloat(tocaLobData[b].tocaPercent)),
+            data: analysisBanks.map(b => parseFloat(tocaLobData[b].tocaPercent)),
             backgroundColor: '#2E5C8A',
             borderRadius: 6
           },
           {
             label: 'LOB (Revenue Functions)',
-            data: banks.map(b => parseFloat(tocaLobData[b].lobPercent)),
+            data: analysisBanks.map(b => parseFloat(tocaLobData[b].lobPercent)),
             backgroundColor: '#E64100',
             borderRadius: 6
           }
@@ -2108,7 +2108,7 @@
     });
 
     // Hiring Intensity Detail Chart
-    const intensityData = {
+    const intensityPerFTE = {
       'Scotiabank': (1887 / 90000 * 1000).toFixed(1),
       'RBC': (1404 / 92000 * 1000).toFixed(1),
       'BMO': (687 / 46000 * 1000).toFixed(1),
@@ -2120,10 +2120,10 @@
     new Chart(intensityDetailCtx, {
       type: 'bar',
       data: {
-        labels: Object.keys(intensityData),
+        labels: Object.keys(intensityPerFTE),
         datasets: [{
           label: 'Roles per 1,000 FTE',
-          data: Object.values(intensityData),
+          data: Object.values(intensityPerFTE),
           backgroundColor: '#5B92C6',
           borderRadius: 6
         }]
@@ -2148,8 +2148,8 @@
       'Scotiabank': (248 / 1887 * 100).toFixed(1)
     };
 
-    const techCtx = document.getElementById('techPercentContainer').getContext('2d');
-    new Chart(techCtx, {
+    const techPctCtx = document.getElementById('techPercentContainer').getContext('2d');
+    new Chart(techPctCtx, {
       type: 'bar',
       data: {
         labels: Object.keys(techPercents),
@@ -2191,7 +2191,7 @@
 
     const aiCtx = document.getElementById('aiExposureChart').getContext('2d');
     new Chart(aiCtx, {
-      type: 'barh',
+      type: 'bar',
       data: {
         labels: sortedAiScores.map(d => d.function),
         datasets: [{
