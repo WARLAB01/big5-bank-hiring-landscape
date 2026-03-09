@@ -2023,6 +2023,7 @@
     });
 
     // ========== ANALYSIS CHARTS ==========
+    try {
 
     // TOCA/LOB Classification
     const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate', 'Insurance'];
@@ -2068,6 +2069,7 @@
     });
 
     // TOCA vs LOB Stacked Bar Chart
+    try {
     const tocaLobCtx = document.getElementById('tocaLobChart').getContext('2d');
     new Chart(tocaLobCtx, {
       type: 'bar',
@@ -2089,11 +2091,11 @@
         ]
       },
       options: {
-        indexAxis: 'x',
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          x: { stacked: true, beginAtZero: true, max: 100 },
+          x: { stacked: true, beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%' } },
           y: { stacked: true }
         },
         plugins: {
@@ -2107,13 +2109,16 @@
       }
     });
 
+    } catch(e) { console.error('TOCA chart error:', e); }
+
     // Hiring Intensity Detail Chart
+    try {
     const intensityPerFTE = {
-      'Scotiabank': (1887 / 90000 * 1000).toFixed(1),
-      'RBC': (1404 / 92000 * 1000).toFixed(1),
-      'BMO': (687 / 46000 * 1000).toFixed(1),
-      'CIBC': (659 / 47000 * 1000).toFixed(1),
-      'TD': (652 / 95000 * 1000).toFixed(1)
+      'Scotiabank': Math.round(1887 / 90000 * 1000 * 10) / 10,
+      'RBC': Math.round(1404 / 92000 * 1000 * 10) / 10,
+      'BMO': Math.round(687 / 46000 * 1000 * 10) / 10,
+      'CIBC': Math.round(659 / 47000 * 1000 * 10) / 10,
+      'TD': Math.round(652 / 95000 * 1000 * 10) / 10
     };
 
     const intensityDetailCtx = document.getElementById('intensityDetailChart').getContext('2d');
@@ -2139,13 +2144,16 @@
       }
     });
 
+    } catch(e) { console.error('Intensity chart error:', e); }
+
     // Tech Hiring as % of Total
+    try {
     const techPercents = {
-      'RBC': (268 / 1404 * 100).toFixed(1),
-      'TD': (112 / 652 * 100).toFixed(1),
-      'CIBC': (108 / 659 * 100).toFixed(1),
-      'BMO': (98 / 687 * 100).toFixed(1),
-      'Scotiabank': (248 / 1887 * 100).toFixed(1)
+      'RBC': Math.round(268 / 1404 * 1000) / 10,
+      'TD': Math.round(112 / 652 * 1000) / 10,
+      'CIBC': Math.round(108 / 659 * 1000) / 10,
+      'BMO': Math.round(98 / 687 * 1000) / 10,
+      'Scotiabank': Math.round(248 / 1887 * 1000) / 10
     };
 
     const techPctCtx = document.getElementById('techPercentContainer').getContext('2d');
@@ -2169,7 +2177,10 @@
       }
     });
 
+    } catch(e) { console.error('Tech percent chart error:', e); }
+
     // AI Exposure by Function (using WARLAB scores)
+    try {
     const aiScores = [
       { function: 'Operations', score: 60.5 },
       { function: 'Retail Banking', score: 57.8 },
@@ -2221,6 +2232,10 @@
         scales: { x: { beginAtZero: true, max: 70 } }
       }
     });
+
+    } catch(e) { console.error('AI exposure chart error:', e); }
+
+    } catch(e) { console.error('Analysis section error:', e); }
 
     // Initialize explorer
     updateExplorer();
