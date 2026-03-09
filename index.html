@@ -965,7 +965,7 @@
       <h3>The TOCA Signal: What Hiring Reveals About Support Overhead</h3>
 
       <p class="analysis-narrative">
-        Across the Big 5, an average of <strong>38.2% of open positions</strong> are in non-revenue-generating functions (Technology, Operations, Corporate Areas). Scotiabank leads with the highest TOCA hiring proportion at 42.3%, while TD has the lowest at 33.8%. This divergence suggests fundamentally different organizational strategies: Scotiabank appears to be investing heavily in infrastructure for transformation, while TD may be consolidating or optimizing its support functions.
+        Across the Big 5, an average of <strong>53.9% of classifiable open positions</strong> are in non-revenue-generating functions (Technology, Operations, Corporate Areas). RBC leads with the highest TOCA hiring proportion at 60.4%, while Scotiabank has the lowest at 46.5%. This divergence suggests fundamentally different organizational strategies: RBC is investing heavily in infrastructure and support capabilities, while Scotiabank's lower TOCA ratio reflects proportionally greater emphasis on revenue-generating LOB hiring — consistent with its international retail and wealth management strategy.
       </p>
 
       <div class="analysis-chart-container">
@@ -976,16 +976,16 @@
       </div>
 
       <p class="analysis-narrative">
-        Within TOCA, Technology roles dominate, representing 3.5% to 5.6% of total hiring across the banks. This reflects the ongoing digital transformation imperative in banking. Operations and Risk roles collectively account for 8-12% of hiring, highlighting the persistent compliance and operational complexity in the sector.
+        Within TOCA, Technology roles dominate, representing 13% to 19% of total hiring across the banks. This reflects the ongoing digital transformation imperative in banking. Risk Management is the second-largest TOCA function, accounting for 8–14% of hiring at most institutions, highlighting the persistent compliance and regulatory complexity in the sector.
       </p>
 
       <div class="cross-ref">
         <strong>WARLAB Context: TOCA Headcount Benchmark</strong>
-        Previous WARLAB research estimated BMO's TOCA headcount at approximately 33% of total FTE — the highest among the Big 6. The hiring data here provides a complementary signal: BMO's current TOCA hiring at 36.9% suggests the institution is working to maintain (but not significantly expand) its support function footprint. In contrast, RBC's 38.1% TOCA hiring indicates a more balanced growth strategy.
+        Previous WARLAB research estimated BMO's TOCA headcount at approximately 33% of total FTE — the highest among the Big 6. The hiring data here shows a notably higher TOCA hiring rate of 56.0%, suggesting BMO's open positions skew more heavily toward support functions than its existing headcount. This is consistent with active investment in risk, technology, and operational capabilities. RBC's 60.4% TOCA hiring — the highest among the Big 5 — reflects its aggressive investment in technology infrastructure, cloud modernization, and AI research capabilities.
       </div>
 
       <p class="analysis-narrative">
-        A strategic implication: institutions with TOCA hiring above 40% may be in active transformation mode, building new capabilities (especially in data, analytics, and technology) before automating or consolidating existing processes. Those below 37% may be in optimization or harvest mode, focusing capital on revenue-generating functions.
+        A strategic implication: institutions with TOCA hiring above 57% may be in active transformation mode, building new capabilities (especially in data, analytics, and technology) before automating or consolidating existing processes. Those below 50% may be in a more balanced or LOB-forward posture, focusing capital on revenue-generating functions. Note: "Other" categories (~4% of total listings) are excluded from this analysis as they cannot be reliably classified.
       </p>
     </div>
 
@@ -1112,7 +1112,7 @@
       <div class="signal-cards">
         <div class="signal-card">
           <h4>Signal 1: Scotiabank's Restructuring Surge</h4>
-          <p>Highest hiring intensity (21.0), highest TOCA % (42.3%), and elevated hiring in Retail and Global Banking suggest active organizational transformation. This is consistent with a period of strategic repositioning and new leadership focus on international growth and digital-first capabilities.</p>
+          <p>Highest hiring intensity (21.0), lowest TOCA % among the Big 5 (46.5%), and elevated hiring in Retail and Global Banking suggest active organizational transformation with a LOB-forward emphasis. This is consistent with a period of strategic repositioning and new leadership focus on international growth and revenue-generating capabilities.</p>
         </div>
 
         <div class="signal-card">
@@ -1132,7 +1132,7 @@
       </div>
 
       <p class="analysis-narrative" style="margin-top: 40px;">
-        <strong>Conclusion:</strong> The Big 5 Canadian bank hiring landscape reveals five distinct institutional postures emerging in response to technological disruption. Scotiabank appears to be in "transformation mode," TD in "remediation mode," and RBC/BMO/CIBC in "steady-state growth mode." The common thread across all five: significant investment in technology infrastructure, moderate-to-high TOCA functions, and rising exposure to AI automation in process-driven roles. How institutions navigate this transition — particularly the timing and magnitude of automation adoption relative to new hiring — will be a key competitive differentiator in the next 18–36 months.
+        <strong>Conclusion:</strong> The Big 5 Canadian bank hiring landscape reveals five distinct institutional postures emerging in response to technological disruption. Scotiabank appears to be in "transformation mode" with high-intensity LOB-forward hiring, TD in "remediation mode" with depressed hiring volume, and RBC/BMO/CIBC in "infrastructure investment mode" with TOCA hiring rates above 56%. The common thread across all five: significant investment in technology infrastructure, majority TOCA-weighted hiring (averaging 53.9%), and rising exposure to AI automation in process-driven roles. How institutions navigate this transition — particularly the timing and magnitude of automation adoption relative to new hiring — will be a key competitive differentiator in the next 18–36 months.
       </p>
     </div>
   </section>
@@ -2026,19 +2026,24 @@
   </script>
   <script>
     // TOCA/LOB Classification
-    const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate', 'Insurance'];
-    const lobCategories = ['Retail', 'Commercial', 'Banking', 'Client', 'Wealth', 'Capital', 'Investment', 'Advisory', 'Global'];
+    // TOCA = Technology, Operations, Corporate Areas (non-revenue support functions)
+    // LOB = Line of Business (revenue-generating functions)
+    // "Other" is excluded from classification (unclassifiable catch-all)
+    const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate'];
+    const lobCategories = ['Retail', 'Commercial', 'Banking', 'Client', 'Wealth', 'Capital', 'Investment', 'Advisory', 'Global', 'Insurance'];
 
     function classifyFunction(categoryName) {
       const lowerName = categoryName.toLowerCase();
+      // Exclude unclassifiable categories
+      if (lowerName === 'other') return 'EXCLUDE';
       const isToca = tocaCategories.some(cat => lowerName.includes(cat.toLowerCase()));
       const isLob = lobCategories.some(cat => lowerName.includes(cat.toLowerCase()));
-      // If both or neither, default to LOB for commercial functions
-      if (isLob && !isToca) return 'LOB';
-      if (isToca && !isLob) return 'TOCA';
-      // Ambiguous: check specific patterns
+      // LOB takes priority when both match (revenue function wins)
+      if (isLob) return 'LOB';
+      if (isToca) return 'TOCA';
+      // Specific LOB patterns
       if (lowerName.includes('customer') || lowerName.includes('service') || lowerName.includes('sales') || lowerName.includes('advice')) return 'LOB';
-      return 'TOCA'; // Default to TOCA for support/operations
+      return 'TOCA'; // Default remaining to TOCA for support/operations
     }
 
     // Calculate TOCA/LOB distribution for each bank
@@ -2053,9 +2058,10 @@
         const classification = classifyFunction(category);
         if (classification === 'TOCA') {
           tocaTotal += count;
-        } else {
+        } else if (classification === 'LOB') {
           lobTotal += count;
         }
+        // EXCLUDE categories (e.g., "Other") are omitted from the split
       });
 
       const total = tocaTotal + lobTotal;
