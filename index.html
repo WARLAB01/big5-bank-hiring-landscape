@@ -2023,7 +2023,10 @@
     });
 
     // ========== ANALYSIS CHARTS ==========
+    console.log('ANALYSIS: Starting analysis section');
     (function() {
+    try {
+    console.log('ANALYSIS: Inside IIFE, aggregateData type:', typeof aggregateData);
 
     // TOCA/LOB Classification
     const tocaCategories = ['Technology', 'Operations', 'HR', 'Human Resources', 'Compliance', 'Risk', 'Finance', 'Legal', 'Marketing', 'Audit', 'Data', 'Analytics', 'Corporate', 'Procurement', 'Real Estate', 'Insurance'];
@@ -2223,6 +2226,8 @@
       }
     });
 
+    console.log('ANALYSIS: All analysis charts created successfully');
+    } catch(e) { console.error('ANALYSIS ERROR:', e.message, e.stack); }
     })();
 
     // Initialize explorer
